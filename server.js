@@ -38,6 +38,7 @@ app.post("/api/Upload", function(req, res) {
     fs.writeFile(inputFileName, base64Image, {encoding: 'base64'}, function(err) {
         console.log('File created');
         resize(inputFileName, format, width).pipe(res)
+        fs.unlinkSync(inputFileName);     
     });
     
     
