@@ -4,6 +4,8 @@ const fs = require('fs');
 const resize = require('./resize');
 
 var app = Express();
+var port = process.env.PORT || 3000;
+
 app.use(bodyParser.json());
 
 app.get("/", function(req, res) {
@@ -42,6 +44,6 @@ app.post("/api/Upload", function(req, res) {
     
 });
 
-app.listen(80, function(a) {
+app.listen(port, function(a) {
     console.log("Listening to port 80");
 });
