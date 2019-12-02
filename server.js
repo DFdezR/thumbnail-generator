@@ -42,6 +42,6 @@ app.post("/api/Upload", function(req, res) {
     
 });
 
-app.listen(2000, function(a) {
-    console.log("Listening to port 2000");
+app.listen(80, function(a) {
+    console.log("Listening to port 80");
 });
