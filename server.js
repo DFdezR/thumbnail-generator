@@ -22,7 +22,6 @@ app.post("/api/upload", function(req, res) {
         let item = req.body.items[key];
 
         const widthString = item.width;
-        const heightString = item.height;
         const format = item.format;
         const imageData = item.imageData;
         const imageName = item.fileName;
@@ -33,11 +32,7 @@ app.post("/api/upload", function(req, res) {
         if (widthString) {
             width = parseInt(widthString)
         }
-        if (heightString) {
-            height = parseInt(heightString)
-        }
-        // Set the content-type of the response
-
+        
         // Remove header
         let base64Image = imageData.split(';base64,').pop();
 
@@ -50,7 +45,7 @@ app.post("/api/upload", function(req, res) {
             .toFormat('jpg')
             .toFile(outputFileName)
             .then(data => {
-                response[imageName] = "data:image/" + format + ";base64," + fs.readFileSync(outputFileName, 'base64');
+                response[imageName] = "data:image/jpg;base64," + fs.readFileSync(outputFileName, 'base64');
                 //All images has been created
                 if(Object.keys(response).length === allItemsSize) {
                     res.status(200).json(response).end();
