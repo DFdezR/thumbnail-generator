@@ -50,7 +50,7 @@ app.post("/api/upload", function(req, res) {
             .toFormat('jpg')
             .toFile(outputFileName)
             .then(data => {
-                response[iamgeName] = "data:image/" + format + ";base64," + fs.readFileSync(outputFileName, 'base64');
+                response[imageName] = "data:image/" + format + ";base64," + fs.readFileSync(outputFileName, 'base64');
                 //All images has been created
                 if(Object.keys(response).length === allItemsSize) {
                     res.status(200).json(response).end();
