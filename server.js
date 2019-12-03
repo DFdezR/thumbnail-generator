@@ -47,6 +47,7 @@ app.post("/api/upload", function(req, res) {
         fs.writeFile(inputFileName, base64Image, {encoding: 'base64'}, function(err) {
             sharp(inputFileName)
             .resize({ width: width })
+            .toFormat('jpg')
             .toFile(outputFileName)
             .then(data => {
                 response[iamgeName] = "data:image/" + format + ";base64," + fs.readFileSync(outputFileName, 'base64');
