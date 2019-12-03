@@ -42,7 +42,7 @@ app.post("/api/upload", function(req, res) {
         let base64Image = imageData.split(';base64,').pop();
 
         let inputFileName = 'Images/' + imageName + "_" + Date.now() + "." + format;
-        let outputFileName = 'Images/' + imageName + "_" + Date.now() + "_thumb." + format;
+        let outputFileName = 'Images/' + imageName + "_" + Date.now() + "_thumb.jpg";
 
         fs.writeFile(inputFileName, base64Image, {encoding: 'base64'}, function(err) {
             sharp(inputFileName)
