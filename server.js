@@ -7,8 +7,7 @@ const sharp = require('sharp')
 var app = Express();
 var port = process.env.PORT || 3000;
 
-app.use(bodyParser.json({ limit: '10mb' }));
-app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+app.use(bodyParser.json());
 
 
 app.get("/", function(req, res) {
@@ -17,9 +16,10 @@ app.get("/", function(req, res) {
 
 app.post("/api/upload", function(req, res) {
     res.type('application/json');
-    var response = {};
+    var response = {"thumbnails":[]};
     var allItemsSize = req.body.items.length;
     for(var key = 0;key < allItemsSize; key++ ) {
+        var thumbnail = {}; 
         let item = req.body.items[key];
 
         const widthString = item.width;
@@ -46,7 +46,9 @@ app.post("/api/upload", function(req, res) {
             .toFormat('jpg')
             .toFile(outputFileName)
             .then(data => {
-                response[imageName] = "data:image/jpg;base64," + fs.readFileSync(outputFileName, 'base64');
+                thumbnail["ImageName"] = "data:image/jpg;base64," + fs.readFileSync(outputFileName, 'base64');
+                thumbnail["parentId"] = parentId;
+                response["items"].push(thumbnail);
                 //All images has been created
                 if(Object.keys(response).length === allItemsSize) {
                     res.status(200).json(response).end();
