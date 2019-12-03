@@ -49,7 +49,7 @@ app.post("/api/upload", function(req, res) {
             .then(data => {
                 thumbnail["ImageName"] = "data:image/jpg;base64," + fs.readFileSync(outputFileName, 'base64');
                 thumbnail["parentId"] = parentId;
-                response["items"].push(thumbnail);
+                response["thumbnails"].push(thumbnail);
                 //All images has been created
                 if(Object.keys(response).length === allItemsSize) {
                     res.status(200).json(response).end();
