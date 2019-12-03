@@ -7,7 +7,8 @@ const sharp = require('sharp')
 var app = Express();
 var port = process.env.PORT || 3000;
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 
 
 app.get("/", function(req, res) {
