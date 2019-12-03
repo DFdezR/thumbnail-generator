@@ -51,7 +51,7 @@ app.post("/api/upload", function(req, res) {
                 thumbnail["parentId"] = parentId;
                 response["thumbnails"].push(thumbnail);
                 //All images has been created
-                if(Object.keys(response).length === allItemsSize) {
+                if(response["thumbnails"].length === allItemsSize) {
                     res.status(200).json(response).end();
                 }
             });
