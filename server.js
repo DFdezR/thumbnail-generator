@@ -20,7 +20,6 @@ app.post("/api/upload", function(req, res) {
     var response = {"thumbnails":[]};
     var allItemsSize = req.body.items.length;
     for(var key = 0;key < allItemsSize; key++ ) {
-        var thumbnail = {}; 
         let item = req.body.items[key];
 
         const widthString = item.width;
@@ -47,6 +46,7 @@ app.post("/api/upload", function(req, res) {
             .toFormat('jpg')
             .toFile(outputFileName)
             .then(data => {
+                var thumbnail = {}; 
                 thumbnail["imageData"] = "data:image/jpg;base64," + fs.readFileSync(outputFileName, 'base64');
                 thumbnail["parentId"] = parentId;
                 thumbnail["imageName"] = imageName;
