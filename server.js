@@ -19,6 +19,9 @@ app.post("/api/upload", function(req, res) {
     res.type('application/json');
     var response = {"thumbnails":[]};
     var allItemsSize = req.body.items.length;
+    if(allItemsSize === 0){
+        res.status(200).json(response).end();
+    }
     for(var key = 0;key < allItemsSize; key++ ) {
         let item = req.body.items[key];
 
