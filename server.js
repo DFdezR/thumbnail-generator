@@ -46,7 +46,7 @@ app.post("/api/upload", function(req, res) {
         fs.writeFile(inputFileName, base64Image, {encoding: 'base64'}, function(err) {
             sharp(inputFileName)
             .resize({ width: width })
-            .toFormat('jpg')
+            .toFormat('jpeg')
             .toFile(outputFileName)
             .then(data => {
                 var thumbnail = {}; 
