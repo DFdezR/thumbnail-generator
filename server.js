@@ -54,10 +54,14 @@ app.post("/api/upload", function(req, res) {
                 thumbnail["parentId"] = parentId;
                 thumbnail["imageName"] = imageName;
                 response["thumbnails"].push(thumbnail);
+                //Remove created images
+                fs.unlinkSync(inputFileName);
+                fs.unlinkSync(outputFileName);
                 //All images has been created
-                if(response["thumbnails"].length === allItemsSize) {
+                if(response["thumbnails"].length === allItemsSize) {                    
                     res.status(200).json(response).end();
                 }
+                
             });
         });
     }
